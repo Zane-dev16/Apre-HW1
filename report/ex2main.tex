@@ -245,12 +245,77 @@ no number
 \href{https://www.overleaf.com/learn/latex/Mathematical_expressions}{this page on Overleaf}.
 \end{enumerate}
 
-\item We you get to the next problem, you can end the enumerate for the parts of the previous problem and then add another item.
-    \begin{enumerate}
-    \item Use a nested enumerate environment to label the parts of the next problem.
-    \item For a quick and broad overview of how to create documents in {\LaTeX} see 
-    \href{https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes}{this quick tutorial from Overleaf}.
-    \end{enumerate}
+\item 
+
+F1 score formula:
+
+\[
+\text{Precision} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Positives (FP)}}
+\]
+\[
+\text{Recall} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Negatives (FN)}}
+\]
+\[
+\text{F1 Score} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+\]
+
+\begin{enumerate}[label=\alph*.]
+
+\item F1 Score for A:
+
+\begin{itemize}
+    \item True Positives (TP) = 2
+    \item False Positives (FP) = 0
+    \item False Negatives (FN) = 1
+\end{itemize}
+
+\[
+\text{Precision}_A = \frac{2}{2 + 0} = 1
+\]
+\[
+\text{Recall}_A = \frac{2}{2 + 1} = \frac{2}{3} \approx 0.6667
+\]
+\[
+\text{F1}_A = 2 \cdot \frac{1 \cdot 0.6667}{1 + 0.6667} = 2 \cdot \frac{0.6667}{1.6667} \approx 0.8
+\]
+
+\item F1 Score for B:
+
+\begin{itemize}
+    \item True Positives (TP) = 4
+    \item False Positives (FP) = 0
+    \item False Negatives (FN) = 0
+\end{itemize}
+
+\[
+\text{Precision}_B = \frac{4}{4 + 0} = 1
+\]
+\[
+\text{Recall}_B = \frac{4}{4 + 0} = 1
+\]
+\[
+\text{F1}_B = 2 \cdot \frac{1 \cdot 1}{1 + 1} = 1
+\]
+
+\item F1 Score for C:
+
+\begin{itemize}
+    \item True Positives (TP) = 5
+    \item False Positives (FP) = 1
+    \item False Negatives (FN) = 0
+\end{itemize}
+
+\[
+\text{Precision}_C = \frac{5}{5 + 1} = \frac{5}{6} \approx 0.8333
+\]
+\[
+\text{Recall}_C = \frac{5}{5 + 0} = 1
+\]
+\[
+\text{F1}_C = 2 \cdot \frac{0.8333 \cdot 1}{0.8333 + 1} = 2 \cdot \frac{0.8333}{1.8333} \approx 0.9091
+\]
+
+\textbf{Class A has the lowest F1 Score,}
 \end{enumerate}
 
 \large{\textbf{Part II}: Programming}\normalsize
@@ -280,7 +345,7 @@ Blood Pressure is the feature with the worst discriminative. power
 
 \item Decision Tree Plot:
     \begin{center}
-        \includegraphics[width=1\textwidth]{img/tree_plot.png} 
+        \includegraphics[width=0.9\textwidth]{img/tree_plot.png} 
     \end{center}
 
     \textbf{Glucose level is the primary factor}:
@@ -337,3 +402,4 @@ Blood Pressure is the feature with the worst discriminative. power
 % ----------------------------------------------------------------------
 
 \end{document}
+
