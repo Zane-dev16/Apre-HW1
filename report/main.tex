@@ -114,15 +114,15 @@
 \begin{enumerate}[leftmargin=\labelsep]
 \item Completion of the decision tree.
 
-\hspace{3pt}
+\vspace{3pt}
 
 \begin{minipage}{0.4\textwidth}
   \includegraphics[scale = 0.3, left]{img/decision_tree_1.pdf}
 \end{minipage}
 \hspace{0.05\textwidth}
 \begin{minipage}{0.6\textwidth}
-  The node we must decide what to do it is on the right for 
-  the dataset $D | (y1 >= 0.3)$.
+  The node we must decide what to do with is to the right
+  of the root, with the dataset $D | (y1 >= 0.3)$.
   \begin{table}[H]
     \centering
     \begin{tabular}{@{}ccccc}
@@ -138,34 +138,40 @@
   \end{table}
 
   Since there are distinct $y_{out}$ values, and more 
-  than 4 observations. We can split this node.
+  than 4 observations. This this node should be split.
 \end{minipage}
+\vspace{3pt}
  
-\hspace{3pt}
-
 To decide the next variable to use, we must calculate 
 the Information Gain of each variable using Shannon 
 entropy for the dataset.
+Considering $X_i$ is a subset of $D | (y1 >= 0.3)$:
+
 
 \begin{equation*}
-    H(y_{out}) = -\frac{3}{7}log_2(\frac{3}{7})-\frac{2}{7}log_2(\frac{2}{7})-\frac{2}{7}log_2(\frac{2}{7}) \\ [2ex]
-    = 1.57
+  H(y_{out}|X_i) = -p(A|X_i)log_2(p(A|X_i))-p(B|X_i)log_2(p(B|X_i))-p(C|X_i)log_2(p(C|X_i))
 \end{equation*}
 
 \begin{equation*}
-  H(y_{out}|y_j) = \sum{-p log_2}
+  H(y_{out}|y_j) = \sum^{i}p(X_i) H(y_{out}|X_i)
 \end{equation*}
 
 \begin{equation*}
   IG(y_j) = H(y_{out}) - H(y_{out}|y_j)
 \end{equation*}
 
+Entropy of the $D | (y1 >= 0.3)$ set:
+
+\begin{equation*}
+  H(y_{out}) = -\frac{3}{7}log_2(\frac{3}{7})-\frac{2}{7}log_2(\frac{2}{7})-\frac{2}{7}log_2(\frac{2}{7}) = 1.57
+\end{equation*}
+
 \begin{table}[H]
   \begin{tabular}{cc|ccccc|cc}
-  $j$ & $x$                    & $p(x)$        & $p(A | x)$   & $p(B | x)$   & $p(C | x)$   & $H(y_{out}|x)$ & $H(y_{out}|y_j)$ & $IG(y_{out}|y_j)$ \\ \midrule
+  $j$ & $X_i$                    & $p(X_i)$        & $p(A | X_i)$   & $p(B | X_i)$   & $p(C | X_i)$   & $H(y_{out}|X_i)$ & $H(y_{out}|y_j)$ & $IG(y_{out}|y_j)$ \\ \midrule
   \multirow{2}{*}{2} & $y_2=0$ & $\frac{4}{7}$ & $\frac{1}{4}$ & $\frac{1}{4}$ & $\frac{2}{4}$ & 1.5  & \multirow{2}{*}{1.25} & \multirow{2}{*}{0.31} \\
    &                   $y_2=1$ & $\frac{3}{7}$ & $\frac{2}{3}$ & $\frac{1}{3}$ & $\frac{0}{3}$ & 0.92 &  &  \\ \midrule
-  \multirow{3}{*}{3} & $y_3=0$ & $\frac{2}{7}$ & $\frac{2}{2}$ & $\frac{0}{2}$ & $\frac{0}{2}$ & 0    & \multirow{3}{*}{0.86} & \multirow{3}{*}{0.70} \\
+  \multirow{3}{*}{3} & $y_3=0$ & $\frac{2}{7}$ & $\frac{2}{2}$ & $\frac{0}{2}$ & $\frac{0}{2}$ & 0    & \multirow{3}{*}{\textbf{0.86}} & \multirow{3}{*}{\textbf{0.70}} \\
    &                   $y_3=1$ & $\frac{4}{7}$ & $\frac{1}{4}$ & $\frac{1}{4}$ & $\frac{2}{4}$ & 1.5  &  &  \\
    &                   $y_3=2$ & $\frac{1}{7}$ & $\frac{0}{1}$ & $\frac{1}{1}$ & $\frac{0}{1}$ & 0    &  &  \\ \midrule
   \multirow{2}{*}{4} & $y_4=0$ & $\frac{4}{7}$ & $\frac{2}{4}$ & $\frac{2}{4}$ & $\frac{0}{4}$ & 1    & \multirow{2}{*}{0.96} & \multirow{2}{*}{0.60} \\
@@ -173,50 +179,164 @@ entropy for the dataset.
   \end{tabular}
 \end{table}
 
-Seeing that $y_4$ is the variable with the most information 
-gain, it is the one that should be chosen to split the node.
+As seen in the table above, $y_3$ is the variable with the 
+most information gain, it is the one that should be chosen 
+to split the node.
+Dividing the node's dataset into 3 subsets:
 
+\vspace{-3pt}
 
-\begin{minipage}{0.5\textwidth}
+\begin{minipage}[t]{0.3\textwidth}
   \begin{table}[H]
     \centering
     \begin{tabular}{@{}cccc}
-      $D | (y1 >= 0.3)$ & $y_2$ & $y_3$ & $y_{out}$ \\ \midrule
-      $x_6$    & 0 & 1 & B \\
+      $y_3 = 0$ & $y_2$ & $y_4$ & $y_{out}$ \\ \midrule
       $x_8$    & 1 & 0 & A \\
       $x_{11}$ & 1 & 0 & A \\
-      $x_{12}$ & 1 & 2 & B \\
     \end{tabular}
   \end{table}
 \end{minipage}
-\begin{minipage}{0.5\textwidth}
+\begin{minipage}[t]{0.3\textwidth}
   \begin{table}[H]
     \centering
     \begin{tabular}{@{}cccc}
-      $D | (y1 >= 0.3)$ & $y_2$ & $y_3$ & $y_{out}$ \\ \midrule
+      $y_3 = 1$ & $y_2$ & $y_4$ & $y_{out}$ \\ \midrule
+      $x_6$    & 0 & 0 & B \\
       $x_7$    & 0 & 1 & A \\
       $x_9$    & 0 & 1 & C \\
       $x_{10}$ & 0 & 1 & C \\
     \end{tabular}
   \end{table}
 \end{minipage}
+\begin{minipage}[t]{0.3\textwidth}
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{@{}cccc}
+      $y_3 = 2$ & $y_2$ & $y_4$ & $y_{out}$ \\ \midrule
+      $x_{12}$ & 1 & 0 & B \\
+    \end{tabular}
+  \end{table}
+\end{minipage}
 
-\includegraphics[scale = 0.3, left]{img/decision_tree_3.pdf}
+\vspace{5pt}
+\fbox{
+\begin{minipage}{0.50\textwidth}
+  \textbf{Solution:} \\
+  \includegraphics[scale = 0.25, left]{img/decision_tree_3.pdf}
+\end{minipage}
+\hspace{0.01\textwidth}
+}
+\hspace{0.02\textwidth}
+\begin{minipage}{0.47\textwidth}
+  The subset where $y_3=1$ is another candidate for splitting,
+  since it has at least 4 observations.
+  The choice of variable is trivially $y_4$, since $y_2$ has no 
+  information gain, and every other variable has been split.
 
+  Now every subset has less than 4 observations.
+  $y_4=1$ is C because it's the most common, and 
+  $y_4=2$ is A, because, having no observations, ascending
+  alphabetic order is prioritized.
+\end{minipage}
+
+\vspace{10pt}
 
 \item Draw the confusion Matrix.
 
-
-\begin{table}[H]
+\begin{minipage}{0.50\textwidth}
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{ccc}
+      D & Target  & Predicted \\ \midrule
+      $x_1$     & C & C \\
+      $x_2$     & B & B \\
+      $x_3$     & C & C \\
+      $x_4$     & B & B \\
+      $x_5$     & C & C \\
+      $x_6$     & B & B \\
+      $x_7$     & A & C \\
+      $x_8$     & A & A \\
+      $x_9$     & C & C \\
+      $x_{10}$  & C & C \\
+      $x_{11}$  & A & A \\
+      $x_{12}$  & B & B \\
+    \end{tabular}
+  \end{table}
+\end{minipage}
+\fbox{
+\begin{minipage}{0.30\textwidth}
   \centering
-  \begin{tabular}{ccccc}
-      & A & B & C & \\ \midrule
-    A & &&& \\
-    B & &&& \\
-    C & &&& \\
-  \end{tabular}
-\end{table}
+  \textbf{Solution:} \\
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{ccccc}
+        & A & B & C & \\ \midrule
+      A & 2 & 0 & 0 & \\
+      B & 0 & 4 & 0 & \\
+      C & 1 & 0 & 5 & \\
+    \end{tabular}
+  \end{table}
+\end{minipage}
+}
+\vspace{10pt}
 
+\item Identify which class has the lowest training F1 score.
+
+For this we will calculate Recall and Precision for each class.
+
+\begin{equation*}
+  recall = \frac{TP}{P}
+\end{equation*}
+
+\begin{equation*}
+  precision = \frac{TP}{TP + FP}
+\end{equation*}
+
+F1 Measure:
+\begin{equation*}
+  F = \frac{2}{\frac{1}{P}+\frac{1}{R}}
+\end{equation*}
+
+\fbox{
+\begin{minipage}{0.30\textwidth}
+  \centering
+  \textbf{Solution:} \\
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{ccccc}
+        & TP & P & FP & Precision & Recall & F1 Measure \\ \midrule
+      A & 2 & 0 & 0 & \\
+      B & 0 & 4 & 0 & \\
+      C & 1 & 0 & 5 & \\
+    \end{tabular}
+  \end{table}
+\end{minipage}
+}
+\vspace{10pt}
+
+
+
+\item Draw the class-conditional relative histograms of y1.
+
+\includegraphics[scale = 0.45, center]{img/histogram1_4.pdf}
+
+If we split the root between each of these five bins, we wind 
+up with the following 5-ary root split:
+
+\fbox{
+\centering
+\begin{minipage}{\textwidth}
+  \centering
+  \textbf{Solution:} \\
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{ccccc}
+      $[0; 0.20[$ & $[0.20; 0.40[$ & $[0.40; 0.60[$ & $[0.60; 0.80[$ & $[0.80; 1]$ \\ \midrule
+      C & B & C & A & A 
+    \end{tabular}
+  \end{table}
+\end{minipage}
+}
 
 \begin{enumerate}
 \item Place your solution. Math can be entered using the equation
