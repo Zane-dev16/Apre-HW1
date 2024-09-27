@@ -319,9 +319,9 @@ For this we will calculate Recall and Precision for each class.
     \large
     \begin{tabular}{ccccccr}
         & TP & FN & FP & Precision     & Recall & F1 Measure \\ \midrule
-      A & 2  & 0  & 1  & $\frac{2}{2}$ & $\frac{2}{2+1}$ & $\frac{2}{1 + \frac{3}{2}} = 0.80 $ \\
+      A & 2  & 0  & 1  & $\frac{2}{2}$ & $\frac{2}{2+1}$ & $\frac{2}{1 + \frac{3}{2}} = \textbf{0.80} $ \\
       B & 4 & 0 & 0    & $\frac{4}{4}$ & $\frac{4}{4}$ & $\frac{2}{1 + 1} = 1.00 $ \\
-      C & 5 & 1 & 0    & $\frac{5}{5+1}$ & $\frac{5}{5}$ & $\frac{2}{\frac{6}{5} + 1} \approx \textbf{0.91}$ \\
+      C & 5 & 1 & 0    & $\frac{5}{5+1}$ & $\frac{5}{5}$ & $\frac{2}{\frac{6}{5} + 1} \approx 0.91$ \\
     \end{tabular}
   \end{table}
   \textbf{Class A has the lowest F1 Score.}
@@ -366,8 +366,8 @@ we wind up with the following 5-ary root split:
 \large{\textbf{Part II}: Programming}\normalsize
 
 \begin{enumerate}[leftmargin=\labelsep]
-\item Glucose is the feature with the most discriminative power (213.16).
-Blood Pressure is the feature with the least discriminative power (3.26).
+\item Glucose is the feature with the most discriminative power (\textbf{213.16}).
+Blood Pressure is the feature with the least discriminative power (\textbf{3.26}).
 \begin{center}
     \begin{minipage}[t]{0.45\textwidth}
         \centering
@@ -389,11 +389,21 @@ Blood Pressure is the feature with the least discriminative power (3.26).
 
 \vfill
 
-\item The training accuracy decreases as the minimum samples split 
-increases, however the test accuracies varies differently, generally
-increasing and then decreasing. To achieve the best generalization
-capacity, the minimum samples split should be set to 50, achieving a
-testing accuracy of 76.% and a training accuracy of 84%
+\item With a very small minimum samples split number, the decision
+tree is prone to overfitting to the training data, which is reflected
+in a less adequate testing accuracy.
+
+The training accuracy notably decreases as the minimum samples
+split increases, as does the testing accuracy after 50 minimum
+samples --- because not having a huge pool of training data,
+the process gets progressively more limited in the number of splits
+it can make.
+
+To achieve the best generalization capacity, the minimum samples
+split should be set to somewhere inbetween, where overfitting is not
+an issue, but also where it doesn't detrimentally limit the number
+of splits done. In this run the optimal peak is at 50 minimum 
+samples, where a testing accuracy of 76\% is achieved.
 
 \vfill
 \newpage
@@ -405,15 +415,15 @@ testing accuracy of 76.% and a training accuracy of 84%
 
     \textbf{Glucose level is the primary factor}:
     \begin{itemize}
-        \item If Glucose $\leq 127.5$: 18.6\% chance of diabetes
+        \item If Glucose $\leq 127.5$: 19.4\% chance of diabetes
         \item If Glucose $> 127.5$: 61.6\% chance of diabetes
     \end{itemize}
     This shows that higher glucose levels are strongly associated with diabetes.
 
     \textbf{Age is a secondary factor for lower glucose levels}:
     \begin{itemize}
-        \item If Glucose $\leq 127.5$ and Age $\leq 28.5$: 7.6\% chance of diabetes
-        \item If Glucose $\leq 127.5$ and Age $> 28.5$: 32\% chance of diabetes
+        \item If Glucose $\leq 127.5$ and Age $\leq 28.5$: 8.5\% chance of diabetes
+        \item If Glucose $\leq 127.5$ and Age $> 28.5$: 33.2\% chance of diabetes
     \end{itemize}
     For people with lower glucose levels, being older increases the chance of diabetes.
 
@@ -421,20 +431,20 @@ testing accuracy of 76.% and a training accuracy of 84%
     \begin{enumerate}[label=\alph*.]
         \item \textbf{For younger people with lower glucose}:
         \begin{itemize}
-            \item If Glucose $\leq 127.5$, Age $\leq 28.5$, and BMI $\leq 45.4$: 6.7\% chance of diabetes
-            \item If Glucose $\leq 127.5$, Age $\leq 28.5$, and BMI $> 45.4$: 66.7\% chance of diabetes
+            \item If Glucose $\leq 127.5$, Age $\leq 28.5$, and BMI $\leq 45.4$: 7.5\% chance of diabetes
+            \item If Glucose $\leq 127.5$, Age $\leq 28.5$, and BMI $> 45.4$: 75\% chance of diabetes
         \end{itemize}
 
         \item \textbf{For older people with lower glucose}:
         \begin{itemize}
-            \item If Glucose $\leq 127.5$, Age $> 28.5$, and BMI $\leq 26.35$: 3\% chance of diabetes
-            \item If Glucose $\leq 127.5$, Age $> 28.5$, and BMI $> 26.35$: 39.1\% chance of diabetes
+            \item If Glucose $\leq 127.5$, Age $> 28.5$, and BMI $\leq 26.35$: 4.9\% chance of diabetes
+            \item If Glucose $\leq 127.5$, Age $> 28.5$, and BMI $> 26.35$: 39.9\% chance of diabetes
         \end{itemize}
 
         \item \textbf{For people with higher glucose}:
         \begin{itemize}
-            \item If Glucose $> 127.5$ and BMI $\leq 29.95$: 31.7\% chance of diabetes
-            \item If Glucose $> 127.5$ and BMI $> 29.95$: 72.8\% chance of diabetes
+            \item If Glucose $> 127.5$ and BMI $\leq 29.95$: 31.6\% chance of diabetes
+            \item If Glucose $> 127.5$ and BMI $> 29.95$: 72.5\% chance of diabetes
         \end{itemize}
     \end{enumerate}
     Higher BMI is associated with a higher chance of diabetes.
@@ -442,7 +452,7 @@ testing accuracy of 76.% and a training accuracy of 84%
     \textbf{For people with higher glucose and BMI, higher glucose levels further indicate the chance of diabetes}:
     \begin{itemize}
         \item If Glucose $> 127.5$, BMI $> 29.95$, and Glucose $\leq 157.5$: 60.9\% chance of diabetes
-        \item If Glucose $> 127.5$, BMI $> 29.95$, and Glucose $> 157.5$: 85.4\% chance of diabetes
+        \item If Glucose $> 127.5$, BMI $> 29.95$, and Glucose $> 157.5$: 87.0\% chance of diabetes
     \end{itemize}
 
 
