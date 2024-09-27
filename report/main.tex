@@ -394,16 +394,15 @@ tree is prone to overfitting to the training data, which is reflected
 in a less adequate testing accuracy.
 
 The training accuracy notably decreases as the minimum samples
-split increases, as does the testing accuracy after 50 minimum
+split increases, and so does the testing accuracy after 50 minimum
 samples --- because not having a huge pool of training data,
-the process gets progressively more limited in the number of splits
-it can make.
+the process gets detrimentally more limited in the number of splits
+it can make (underfitting).
 
 To achieve the best generalization capacity, the minimum samples
-split should be set to somewhere inbetween, where overfitting is not
-an issue, but also where it doesn't detrimentally limit the number
-of splits done. In this run the optimal peak is at 50 minimum 
-samples, where a testing accuracy of 76\% is achieved.
+split should be set to somewhere inbetween, where neither overfitting
+nor underfitting is an issue. In this run the optimal peak is at 50 
+minimum samples, where a testing accuracy of 76\% is achieved.
 
 \vfill
 \newpage
