@@ -1,4 +1,5 @@
-*.pdf
+main.pdf
+img/IST_A-eps-converted-to.pdf
 *.aux
 *.log
 *.out
