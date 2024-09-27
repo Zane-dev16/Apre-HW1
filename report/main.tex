@@ -151,29 +151,25 @@ entropy for the dataset.
     H(y_{out}) = -\frac{3}{7}log_2(\frac{3}{7})-\frac{2}{7}log_2(\frac{2}{7})-\frac{2}{7}log_2(\frac{2}{7}) \\ [2ex]
     = 1.57
 \end{equation*}
+
+\begin{equation*}
+  H(y_{out}|y_j) = \sum{-p log_2}
+\end{equation*}
+
 \begin{equation*}
   IG(y_j) = H(y_{out}) - H(y_{out}|y_j)
-\end{equation*}
-\begin{equation*}
-  IG(y_2) = H(y_{out}) - H(y_{out}|y_2) = 0.31
-\end{equation*}
-\begin{equation*}
-  IG(y_3) = H(y_{out}) - H(y_{out}|y_3) = 0.56
-\end{equation*}
-\begin{equation*}
-  IG(y_4) = H(y_{out}) - H(y_{out}|y_4) = 0.59
 \end{equation*}
 
 \begin{table}[H]
   \begin{tabular}{cc|ccccc|cc}
   $j$ & $x$                    & $p(x)$        & $p(A | x)$   & $p(B | x)$   & $p(C | x)$   & $H(y_{out}|x)$ & $H(y_{out}|y_j)$ & $IG(y_{out}|y_j)$ \\ \midrule
-  \multirow{2}{*}{2} & $y_2=0$ & $\frac{4}{7}$ & $\frac{1}{4}$ & $\frac{1}{4}$ & $\frac{2}{4}$ &  & \\
-   &                   $y_2=1$ & $\frac{3}{7}$ & $\frac{2}{3}$ & $\frac{1}{3}$ & $\frac{0}{3}$ &  & \\ \midrule
-  \multirow{3}{*}{3} & $y_3=0$ & $\frac{2}{7}$ & $\frac{2}{2}$ & $\frac{0}{2}$ & $\frac{0}{2}$ &  & \\
-   &                   $y_3=1$ & $\frac{4}{7}$ & $\frac{1}{4}$ & $\frac{1}{4}$ & $\frac{2}{4}$ &  & \\
-   &                   $y_3=2$ & $\frac{1}{7}$ & $\frac{0}{1}$ & $\frac{1}{1}$ & $\frac{0}{1}$ &  & \\ \midrule
-  \multirow{2}{*}{4} & $y_4=0$ & $\frac{4}{7}$ & $\frac{2}{4}$ & $\frac{2}{4}$ & $\frac{0}{4}$ &  & \\
-   &                   $y_2=4$ & $\frac{3}{7}$ & $\frac{1}{3}$ & $\frac{0}{3}$ & $\frac{2}{3}$ &  & \\ \bottomrule
+  \multirow{2}{*}{2} & $y_2=0$ & $\frac{4}{7}$ & $\frac{1}{4}$ & $\frac{1}{4}$ & $\frac{2}{4}$ & 1.5  & \multirow{2}{*}{1.25} & \multirow{2}{*}{0.31} \\
+   &                   $y_2=1$ & $\frac{3}{7}$ & $\frac{2}{3}$ & $\frac{1}{3}$ & $\frac{0}{3}$ & 0.92 &  &  \\ \midrule
+  \multirow{3}{*}{3} & $y_3=0$ & $\frac{2}{7}$ & $\frac{2}{2}$ & $\frac{0}{2}$ & $\frac{0}{2}$ & 0    & \multirow{3}{*}{0.86} & \multirow{3}{*}{0.70} \\
+   &                   $y_3=1$ & $\frac{4}{7}$ & $\frac{1}{4}$ & $\frac{1}{4}$ & $\frac{2}{4}$ & 1.5  &  &  \\
+   &                   $y_3=2$ & $\frac{1}{7}$ & $\frac{0}{1}$ & $\frac{1}{1}$ & $\frac{0}{1}$ & 0    &  &  \\ \midrule
+  \multirow{2}{*}{4} & $y_4=0$ & $\frac{4}{7}$ & $\frac{2}{4}$ & $\frac{2}{4}$ & $\frac{0}{4}$ & 1    & \multirow{2}{*}{0.96} & \multirow{2}{*}{0.60} \\
+   &                   $y_2=4$ & $\frac{3}{7}$ & $\frac{1}{3}$ & $\frac{0}{3}$ & $\frac{2}{3}$ & 0.92 &  &  \\ \bottomrule
   \end{tabular}
 \end{table}
 
@@ -259,7 +255,7 @@ no number
 
 \large{\textbf{Part II}: Programming}\normalsize
 
-\begin{enumerate}[leftmargin=\labelsep,resume]
+\begin{enumerate}[leftmargin=\labelsep]
 \item Solution to the programming questions here.
 \end{enumerate}
 
